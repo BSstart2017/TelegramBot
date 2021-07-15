@@ -1,5 +1,8 @@
+from flask import Flask, app, request
 import requests
 
+
+app = Flask(__name__)
 #https://api.telegram.org/bot1717938340:AAFr7fwkyg94ZWi0vOcJ-yErL8JB4NzfN4M/setWebhook?url=https://belle-gerard-08161.herokuapp.com/
 
 TOKEN = '1717938340:AAFr7fwkyg94ZWi0vOcJ-yErL8JB4NzfN4M'
@@ -39,6 +42,12 @@ def main():
     if 'Pass' in text:
         send_message(chat_id, 'ok')
 
+@app.route("/", methods=["GET", "POST"])
+def receive_update():
+    if request.method == "POST":
+        print(request.json)
+    return {"ok": True}
+
     
-if __name__ == '__main__':
-    main()
+if __name__ == '__app__':
+    app.run()
